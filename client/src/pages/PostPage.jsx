@@ -2,8 +2,8 @@ import { formatISO9075 } from "date-fns";
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
-import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import Swal from "sweetalert2";
+import Header from "../Header";
 
 export default function PostPage() {
     const [postInfo, setPostInfo] = useState(null);
@@ -68,12 +68,11 @@ export default function PostPage() {
             );
         }
     }
-    
-
     if (!postInfo) return '';
 
     return (
         <div className="post-page">
+            <Header/>
             <h1>{postInfo.title}</h1>
             <time>{formatISO9075(new Date(postInfo.createdAt))}</time>
             <div className="author">by @{postInfo.author.username}</div>
@@ -95,5 +94,5 @@ export default function PostPage() {
             </div>
             <div className="content" dangerouslySetInnerHTML={{ __html: postInfo.content }} />
         </div>
-    );
+    )
 }

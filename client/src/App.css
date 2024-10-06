@@ -179,31 +179,7 @@ div.edit-row{
   margin-bottom: 15px;
 }
 
-/* div.post-page a.edit-btn{
-  background-color: #0d6efd;
-  color: #fff;
-  padding: 15px;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  text-decoration: none;
-  margin-right: 5px;
-}
-.delete-btn{
-  background-color: #F05A7E;
-  color: #ddd;
-  padding: 5px;
-  gap: 5px; 
-  border-radius: 5px;
-  text-decoration: none; 
-  margin-bottom: 5px;  
-} */
 
-a svg{
-  height: 20px;
-}
 /* ///////////// */
 /* Wrapper to center form on the screen */
 .container {
@@ -212,6 +188,7 @@ a svg{
   align-items: center;
   max-height: 100vh;
   padding: 20px;
+  margin-top: 5rem;
 }
 
 /* Input field styling */

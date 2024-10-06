@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Post from "../post"
+import Header from "../Header";
 
 export default function IndexPage() {
     const [posts,setPosts] = useState([]);
@@ -12,6 +13,7 @@ export default function IndexPage() {
     }, []);
     return (
       <>
+      <Header/>
         {posts.length > 0 && posts.map(post => (
           <Post {...post} />
         ))}

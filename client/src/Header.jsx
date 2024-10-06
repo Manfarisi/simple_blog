@@ -41,7 +41,7 @@ export default function Header() {
         {username ? (
           <>
             <span>Hello, {username} </span>
-            <Link to="/create">Create New Post</Link>
+            <Link to="/create" style={{ background: '#1DA1F2', padding:'2px', borderRadius: '25px'}}>Create New Post</Link>
             <a onClick={logout}> 
             <button class="Btn">
             <div class="sign">

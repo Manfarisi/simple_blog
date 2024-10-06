@@ -35,7 +35,7 @@ export default function CreatePost(){
             return <Navigate to={'/'}/>
         }
     return(
-        <form onSubmit={createNewPost}>
+        <form onSubmit={createNewPost} style={{ marginTop: '3rem' }}>
             <input type="title" placeholder={'Title'} value={title} onChange={ev =>setTitle(ev.target.value)}/>
             <input type="summary" placeholder={'Summary'} value={summary} onChange={ev =>setSummary(ev.target.value)}/>
             <input type="file"  onChange={ev => setFiles(ev.target.files)} required/>
@@ -44,3 +44,4 @@ export default function CreatePost(){
         </form>
     )
 }
+

@@ -9,7 +9,6 @@ export default function DeletePost() {
         fetch('http://localhost:4000/delete/' + id)
             .then(response => response.json())
             .then(postInfo => {
-                // Anda dapat menambahkan logika tambahan di sini jika diperlukan
             });
     }, [id]);
 
