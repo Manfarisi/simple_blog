@@ -76,7 +76,11 @@ export default function PostPage() {
                 />
             </div>
             <div className="content" dangerouslySetInnerHTML={{ __html: postInfo.content }} />
-
+            <div className="back-btn-container">
+                <button className="back-btn" style={{ marginTop: '3rem' }} onClick={() => navigate('/')}>
+                    Kembali ke Halaman Awal
+                </button>
+            </div>
         </div>
     );
 }
