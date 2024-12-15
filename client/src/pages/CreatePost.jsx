@@ -1,5 +1,4 @@
 import { useState } from "react"
-import ReactQuill from "react-quill"
 import 'react-quill/dist/quill.snow.css'
 import { Navigate} from "react-router-dom"
 import Editor from "../Editor"
@@ -36,6 +35,7 @@ export default function CreatePost(){
         }
     return(
         <form onSubmit={createNewPost} style={{ marginTop: '3rem' }}>
+            <h1 className="text-center text-4xl font-bold mb-4">Halaman Post</h1>
             <input type="title" placeholder={'Title'} value={title} onChange={ev =>setTitle(ev.target.value)} required/>
             <input type="summary" placeholder={'Summary'} value={summary} onChange={ev =>setSummary(ev.target.value)} required/>
             <input type="file"  onChange={ev => setFiles(ev.target.files)} required/>

@@ -20,7 +20,7 @@ export default function EditPost(){
                 setSummary(postInfo.summary)
             })
         })
-    }, [])
+    }, [id])
     
     async function updatePost(ev){
         ev.preventDefault()
@@ -46,6 +46,7 @@ export default function EditPost(){
     }
 return(
     <form onSubmit={updatePost}>
+        <h1 className="text-center text-4xl font-bold mb-4">Halaman Edit</h1>
         <input type="title" placeholder={'Title'} value={title} onChange={ev =>setTitle(ev.target.value)}/>
         <input type="summary" placeholder={'Summary'} value={summary} onChange={ev =>setSummary(ev.target.value)}/>
         <input type="file"  onChange={ev => setFiles(ev.target.files)}/>

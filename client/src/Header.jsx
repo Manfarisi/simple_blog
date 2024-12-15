@@ -1,80 +1,197 @@
 import { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { UserContext } from "./UserContext";
-import logo from './assets/banner-logo.png'; 
+import logo from "./assets/banner-logo.png";
 import Swal from "sweetalert2";
-
 
 export default function Header() {
   const { setUserInfo, userInfo } = useContext(UserContext);
+  const location = useLocation();
 
   useEffect(() => {
-    fetch('http://localhost:4000/profile', {
-      credentials: 'include'
-    }).then(response => {
-      response.json().then(userInfo => {
+    fetch("http://localhost:4000/profile", {
+      credentials: "include",
+    }).then((response) => {
+      response.json().then((userInfo) => {
         setUserInfo(userInfo);
       });
     });
   }, []);
 
   function logout() {
-    fetch('http://localhost:4000/logout', {
-      credentials: 'include',
-      method: 'POST',
+    fetch("http://localhost:4000/logout", {
+      credentials: "include",
+      method: "POST",
     });
     setUserInfo(null);
     Swal.fire({
       title: "You are logout",
-      icon: "info"
+      icon: "info",
     });
   }
 
   const username = userInfo?.username;
   return (
-  <header>
-    <div>
-      <Link to="/" className="logo">
-        <img src={logo} alt="Logo" style={{ height: '75px' }} />
-      </Link>
-    </div>
-    <nav>
-      {username ? (
-        <>
-          <h1>Hello, {username} </h1>
-          <Link 
-            to={`/user/${userInfo.id}`} 
-            style={{ background: '#4CAF50', padding: '5px', borderRadius: '10px' }}
-          >
-            My Posts
-          </Link>
-          
-          <Link 
-            to="/create" 
-            style={{ background: '#1DA1F2', padding: '5px', borderRadius: '10px' }}
-          >
-             Create New Post
-          </Link>
-          <a onClick={logout}>
-            <button className="Btn">
-              <div className="sign">
-                <svg viewBox="0 0 512 512">
-                  <path
-                    d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"
-                  ></path>
-                </svg>
+    <>
+      <nav className="navbar bg-slate-500 mb-4">
+        <div className="flex justify-between items-center w-full px-4">
+          {/* Logo Section */}
+          <div className="flex-1 mb-4">
+            <Link to="/" className="logo">
+              <img src={logo} alt="Logo" style={{ height: "75px" }} />
+            </Link>
+          </div>
+
+          {/* Navigation Links */}
+          <div className="flex items-center space-x-4">
+            {username ? (
+              <>
+                <h1 className="text-lg font-medium text-white">
+                  Hello, {username}
+                </h1>
+
+                <div className="dropdown dropdown-end">
+                  <div
+                    tabIndex={0}
+                    role="button"
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <div className="avatar online placeholder">
+                      <div className="bg-neutral text-neutral-content w-10 rounded-full">
+                        <span className="text-xl"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                  >
+                    <li>
+                      <Link
+                        to="/create"
+                        className={
+                          location.pathname === "/create" ? "active-link" : ""
+                        }
+                      >
+                        Create New Post
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to={`/user/${userInfo.id}`}
+                        className={
+                          location.pathname === `/user/${userInfo.id}`
+                            ? "active-link"
+                            : ""
+                        }
+                      >
+                        Dashboard
+                      </Link>
+                    </li>
+                    <li>
+                      <a onClick={logout}>Logout</a>
+                    </li>
+                  </ul>
+                </div>
+              </>
+            ) : (
+              <div className="flex space-x-4">
+                <Link
+                  to="/login"
+                  className={`px-4 py-2 rounded-lg text-white bg-blue-500 ${
+                    location.pathname === "/login"
+                      ? "bg-blue-600 shadow-md"
+                      : "bg-gray-400 hover:bg-blue-500"
+                  }`}
+                >
+                  Login
+                </Link>
+
+                <Link
+                  to="/register"
+                  className={`px-4 py-2 rounded-lg text-white bg-green-500 ${
+                    location.pathname === "/register"
+                      ? "bg-green-600 shadow-md"
+                      : "bg-gray-400 hover:bg-green-500"
+                  }`}
+                >
+                  Register
+                </Link>
               </div>
-              <div className="text">Logout</div>
-            </button>
-          </a>
-        </>
-      ) : (
-        <>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
-        </>
-      )}
-    </nav>
-  </header>
-);
+            )}
+          </div>
+        </div>
+      </nav>
+    </>
+  );
+}
+
+{
+  /* <nav className="navbar bg-base-100 shadow-md">
+<div className="flex justify-between items-center w-full px-4">
+  
+  <div>
+
+  </div>
+
+ 
+  <div className="flex items-center space-x-4">
+    {username ? (
+      <>
+        
+
+        <div className="dropdown dropdown-end">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle avatar"
+          >
+            <div className="w-10 rounded-full">
+              <img
+                alt="User Avatar"
+                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+              />
+            </div>
+          </div>
+
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+          >
+           
+            </li>
+            <li>
+              
+            </li>
+            <li>
+              <a onClick={logout}>Logout</a>
+            </li>
+          </ul>
+        </div>
+      </>
+    ) : (
+      <>
+        <Link
+          to="/login"
+          className={
+            location.pathname === "/login" ? "active-link" : ""
+          }
+        >
+          Login
+        </Link>
+
+        <Link
+          to="/register"
+          className={
+            location.pathname === "/register" ? "active-link" : ""
+          }
+        >
+          Register
+        </Link>
+      </>
+    )}
+  </div>
+</div>
+</nav> */
 }
